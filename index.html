@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS varialbe</title>
+
+    <script>
+
+        const a = prompt('Entrez un premier nombre')
+        const b = prompt('Entrez un second nombre')
+        const result = a * b;
+        let signe
+
+        if(isNaN(result)){
+            console.log(`Rentre un chiffre: ${a}x${b} `)
+        }else{
+            if (result > 0){
+                signe = 'positif'
+            } else {
+            signe = 'négatif'
+            }
+            console.log(`${a}x${b}=${result} est ${signe}`)
+        }
+       
+       
+    </script>
+  </head>
+  <body></body>
+</html>
