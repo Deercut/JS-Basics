@@ -8,19 +8,16 @@
 
     <script>
 
-
-      let guess = 8; 
-      let chiffre
-      while(chiffre !== guess){
-        chiffre = prompt('Votre chiffre') * 1
-        if(chiffre < guess){
-          console.log('Plus')
-        } else if (chiffre >guess){
-          console.log('Moins')
+     
+     const a = {
+        firstname: 'jhon',
+        lastname : 'Wick',
+        fullname : function () {
+          console.log(`${this.firstname} ${this.lastname}`)
         }
-      }
-      console.log('Bravo !! Tu as trouvé')
-
+     }
+     a.fullname()
+     console.log('Hello'.toUpperCase())
     </script>
   </head>
   <body></body>
