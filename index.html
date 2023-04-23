@@ -8,12 +8,19 @@
 
     <script>
 
-      let age = 18
-      if(age >= 18){
-        let suffix = 'hello'
+
+      let guess = 8; 
+      let chiffre
+      while(chiffre !== guess){
+        chiffre = prompt('Votre chiffre') * 1
+        if(chiffre < guess){
+          console.log('Plus')
+        } else if (chiffre >guess){
+          console.log('Moins')
+        }
       }
-      console.log(suffit)
-       
+      console.log('Bravo !! Tu as trouvé')
+
     </script>
   </head>
   <body></body>
