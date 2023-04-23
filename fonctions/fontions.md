@@ -1,5 +1,7 @@
 # Les fonctions 
 
+liens utiles : https://devdocs.io/
+
 Imaginons l'idée d'un petit code "can drive" qui permet à l'utilisateur de savoir si il peut conduire ou non. 
 
 Notre fonction vas avoir besoin de paramètre pour avoir de la logique d'utilisation. Savoir ce qu'elle peut faire ou pas. 
@@ -235,3 +237,52 @@ console.log('Hello'.toUpperCase())
 ```
 
 
+### Autre notation possible et recommandée 
+
+```js
+const maFonction = (param1, param2) => {
+        console.log(param1, param2);
+      };
+
+      maFonction(1, 2);
+```
+
+La principale différence est le comportement de 'this' à l'intérieur. $
+Si on veut faire un consol.log de this, alors j'aurais l'objet global. 
+
+Mais si on l'appel avec call  et qu'on lui place un arguement un peu bizarre. 
+
+
+```js
+const maFonction = (param1, param2) => {
+        console.log(param1, param2, this);
+      };
+
+      maFonction(3, 1, 2);
+```
+
+Mais attention,car comme this fait appel a référence à un objet général, nous allons avoir un retoure comme undefined. 
+
+```js
+const a = {
+        firstname: "jhon",
+        lastname: "Wick",
+        fullname: () => {
+          console.log(`${this.firstname} ${this.lastname}`);
+        },
+      };
+      a.fullname()
+```
+
+Contrairement avec le mot clé fonction, les fonctions fléchés ne peuvent pas altéré le this. 
+Beaucoup de dev évitent d'utiliser this pour esquiver les problèmes. Dans des fonctions on vas éviter le plus possible. 
+
+Autre avantage des fontions fléchis pouvoir retouner directement. 
+
+```js
+const somme = (a, b) => a + b
+
+      console.log(somme(1, 2))
+```
+
+Si on se sens à l'aise on peut directement se paser des { }. 
