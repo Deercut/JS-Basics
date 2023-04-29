@@ -286,3 +286,165 @@ const somme = (a, b) => a + b
 ```
 
 Si on se sens à l'aise on peut directement se paser des { }. 
+Dans ce ça on crée une fonction qui renvoit cette opération a + b. 
+
+Il es possible de passer des fonctions en paramètres de fonctions.
+
+On vas créer une const isPairt et lui attribuer une fonction.
+
+```js
+ const isPair = function (a, fn){
+        return a % 2 === 0; 
+      }
+```
+
+## La fonction callback
+
+Mais on s'imagine qu'on vas lui donner une fonction en paramètre (fn), ce qui veux dire que si le nombre est pair on vas éxécuter cette fonction. 
+Et si le nombre n'est pas pair on vas pas l'éxécuter. 
+
+```js
+ const isPair = function (a, fn){
+        if (a % 2 === 0){
+          fn(a)
+        } 
+      }
+
+      isPair(4, function(n){
+        console.log('Mon nombre est paire' + n)
+      })
+```
+Ici nous avons donc un log qui ne s'afficheras uniquement que si le nombre est paire. Si jamais il es impair, alors le log ne s'afficheras pas. 
+
+Ici on vas alors parler de cette fonction présente dans notre fonction une CallBack.
+
+Quand un paramètre est une fonction qu'on vas appeller celon certaines conditions, alors cette fonction est nommée CALLBACK. 
+C'est vraiment utile quand on vas placer des fonctions. 
+
+## Exercice 1 :
+
+Faire en sorte que l'utilisateur doivent deviner un nombre. Mais aujourd'hui on peut générer une fonction qui donne un chiffre aléatoire. 
+
+```js
+
+/* 
+      On crée un nombre entre 0 et 10 
+      3 essais pour deviner le mot
+      isRight(n)
+      guess()
+*/
+```
+
+```js
+
+//On crée un nombre random entre 0 et 10
+
+ function getRanDomInt(max){
+        return Math.floor(Math.random()* (max + 1))
+      }
+      const solution = getRanDomInt(10)
+      console.log(solution)
+//Fonction pour vérifier si on a raison ou pas
+
+      function isRight(n){
+        return solution === n 
+      }
+//Fonction pour entrer un chiffre 
+
+      function guess() {
+        const number = prompt('Entrez un chiffre') * 1
+        return isRight(number)
+      }
+//Condition pour valider ou invalider 3 essais
+
+      for (i = 0; i < 3; i++){
+        if(guess()){
+          console.log("BRAVO")
+          break;
+        }else if(i === 2){
+          console.log("Vous avez perdu...")
+        }
+      }
+```
+Avantage de pouvoir faire des fonctions de cette façon, et nous l'avons vue, c'est qu'on peut créer des bouts de code qu'on vas pouvoir ré-utiliser un peu plus tard quand on vas en avoir besoin. 
+
+
+## Exercice 2 :
+
+```js
+/* 
+     Passer un nombre,
+     Réussir à dire si le nombre est premier ou non. 
+     Un nombre uniquement divisible par 1 ou lui même. 
+*/
+```
+
+```JS
+
+ function isPrim (n){
+        if (n < 2){
+          return false
+        }
+        for (let i = n - 1; i > 1; i-- ){
+          if(n % i === 0 ){
+            return false
+          }
+        }
+        return true;
+      }
+
+
+```
+
+
+
+### Earyly Return : 
+
+On vas rapidement mètre un return pour stopper l'éxécution de notre code si jamais celui-ci n'est absolument pas nécessaire. C'est le cas au début de notre code avec : 
+
+```JS
+function isPrim (n){
+        if (n < 2){
+          return false
+        }
+
+```
+
+
+
+## A retenir : 
+
+Les fonctions ne sont rien de plus qu'un type particulier en JS et on peut les utiliser à n'importe quel endroit. 
+
+Il y as 3 façons d'écrire une fonction : 
+
+```JS
+
+//Méthode 1
+
+//Fonction qui seras écrite avec un paramètre comme ceci et donc seras déclarée de façon global
+function isPrim (n) 
+
+//Méthode 2
+
+//Soit dans une constante 
+
+const function isPrime(n){
+
+}
+
+//Méthode 3
+
+//Soit de façon fléché
+
+fullname: () => {
+          console.log(`${this.firstname} ${this.lastname}`);
+        },
+
+
+
+
+
+
+
+```

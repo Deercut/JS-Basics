@@ -8,10 +8,29 @@
 
     <script>
       
+      /* 
+      On crée un nombre entre 0 et 10 
+      3 essais pour deviner le mot
+      isRight(n)
+      guess()
+      */
 
-      const somme = (a, b) => a + b
+      
+      function isPrim (n){
+        if (n < 2){
+          return false
+        }
+        for (let i = n - 1; i > 1; i-- ){
+          if(n % i === 0 ){
+            return false
+          }
+        }
+        return true;
+      }
 
-      console.log(somme(1, 2))
+
+
+
 
     </script>
   </head>
