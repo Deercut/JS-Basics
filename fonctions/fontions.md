@@ -444,3 +444,269 @@ fullname: () => {
 
 ```
 
+## Pratiquer les fonctions
+
+
+## Le palindrome
+
+Essayons de créer un bout de code avec une fonction qui vas vérifier si le mot renseigner est un palindrome ou pas. 
+
+C'est un exercice assez basique mais qui permet de bien prendre en main les fonctions. 
+
+```js
+console.log("Test Palindrome");
+
+      function isPalindrome(word) {
+        Split
+        const letters = word.split("");
+
+```
+
+Ici nous allons simplement créer une fonction qui prends en paramètre une variable word
+
+
+
+### Fonction reverse
+
+Nous allons ensuite faire appel à une fonction qui éxiste déjà dans JS, le split. 
+Le split vas nous permettre de découper notre mot lettre par lettre. 
+
+```js
+        reverse
+        letters.reverse();
+
+```
+
+### Fonction join
+
+La fonction "join" permet de créer et renvois une nouvelle chaine de caractères en concaténant tout les 
+éléments d'un tableau. 
+
+```js
+        Join
+        const reverseWord = letters.join("");
+```
+
+### Fonction toUppercase
+
+La fonction toUppercase vas permettre de transformer nos caracètre en MAJUSCULE
+
+
+```js
+        //ToUpperCase
+        //return word.toUpperCase() === reverseWord.toUpperCase()
+```
+
+
+### Utilisation des fonctions
+
+Si maintenant on veux utiliser toutes ces fonctions en une ligne on peut le faire ainsi. 
+
+
+```js
+        //All in one or two
+        const reverseWord = word.split("").reverse().join("");
+        return word.toUpperCase() === reverseWord.toUpperCase();
+      }
+```
+
+
+
+
+Maintenant metons tout en place correctement en déclarant nos mots et ce qu ils doivent retourner. 
+
+```JS
+
+  const reverseWord = word.split("").reverse().join("");
+        return word.toUpperCase() === reverseWord.toUpperCase();
+      }
+      const words = {
+        kayak: true,
+        SOS: true,
+        Kayak: true,
+        Bonjour: false,
+      };
+
+//La boucle for vas nous permettre de parcourir tout nos mots. 
+      for (let word in words) {
+        if (isPalindrome(word) !== words[word]) {
+          console.error('isPalindrome(${words})')
+        }
+      }
+```
+
+
+
+### Fonction avec tableau d'étudiant
+
+
+Ici on vas vouloir créer une première fonction qui vas afficher la moyenne d'un tableau de notes d'étudiant. 
+
+```JS
+
+const students = [
+        {
+          name: "Jean",
+          notes: [1, 20, 19, 16, 12],
+        },
+        {
+          name: "Mary",
+          notes: [14, 6, 15, 20, 15],
+        },
+        {
+          name: "Dustin",
+          notes: [12, 2, 14, 10, 8],
+        },
+        {
+          name: "Axel",
+          notes: [1, 20, 10, 16, 12],
+        },
+        {
+          name: "Chloe",
+          notes: [1, 20, 19, 16, 12],
+        },
+      ];
+
+```
+Voila notre tableau d'étudiant avec des notes pour chaques étudiants. 
+
+## Moyenne des notes 
+
+Nous allons créer une fonction qui vas nous renvoyer une moyenne de toutes nos notes puis on vas afficher le résultat. 
+
+
+```JS
+ const moyenne = (notes) => {
+        let sum = 0;
+        for (let note of notes) {
+          sum = sum + note;
+        }
+        return sum / notes.length;
+      };
+```
+
+Ensuite nous allons ajouter la valeur trouver à nos tableaux de notes. 
+
+```jS
+const compareStudent = (a, b) => {
+        return b.moyenne - a.moyenne;
+      };
+```
+
+Nous allons pouvoir ensuite organiser nos moyennes et également trouver la note Max et la note Minimal de chaques étudiants. 
+Pour cela on vas utiliser deux fonctions qui éxistent déjà dans Javascript, Math.min et Math.max
+
+
+```js
+for (let student of students) {
+        //Ici on modifie un objet et donc tout ce qui feras
+        //référance à notre objet
+        student.moyenne = moyenne(student.notes);
+        student.worst = Math.min(...student.notes);
+        student.best = Math.max(...student.notes);
+      }
+```
+
+### Fonction sort
+
+Maintenant on vas utiliser la fonction javascript "sort". Sort nous permet d'organiser les éléments en place, soit de façon 
+alphabétique ou d'une façon définis. 
+
+```js
+students.sort(compareStudent);
+```
+
+Maintenant qu'on a tout cela, on vas vouloir organiser un peu plus nos informations. 
+Pour cela on vas créer une nouvelle fonction "formatStudent" qui vas formater les informations sorties. 
+
+```js
+const formatStudent = (student) => {
+        return ` ${student.name} avec une moyenne de ${student.moyenne}, 
+        meilleur note (${student.best}),
+         pire note (${student.worst})`
+      }
+```
+
+### Faire un top 3 des meilleurs élèves
+
+Pour cela on vas devoir allez parcourir nos tableaux et trouver celui qui se trouve en position 1, 2 et 3. C'est un top 3 après tout. 
+
+Pour ça, on vas allez parcourir nos tableaux et pour RAPPEL la première position dans un tableau est à la position 0 
+
+```js
+console.log(`TOp 3 étudiant
+      1 : ${formatStudent(students[0])}
+      2 : ${formatStudent(students[1])}
+      3 : ${formatStudent(students[2])}
+      `);
+```      
+
+
+## Fréquence de mot dans une string
+
+Ici on vas vouloir trouver combien de fois un mot est présent. 
+
+Pour ça on vas devoir créer un objet avec "mot" en propriété et retirer les caractère spéciaux. 
+Découper tout les mots avec une fonction "split". Créer un objet qui contient les fréquences.
+
+```js
+      const phrase = 'Vous, vous, savez pas!? Vous vous vous pas, y as Pas, de pas, Bonne ou mauvaise ...'
+      const frequencies = {}
+```
+
+Ensuite on vas faire un tableau ignored, dans lequel on vas y renseigner tout les caracètres à retirer. 
+
+```js
+ const ignored = [',','!','?']
+       let cleanPhrase = phrase.toLowerCase()
+        for (let charactère of ignored){
+          cleanPhrase = cleanPhrase.
+          replaceAll(charactère, '')
+        }
+```
+
+### Le split
+
+Ensuite on vas créer un écartement avec la fonction .split(' '), qui prendras en paramètre du vide dans notre cas. 
+
+```js
+const words = phrase.split(' ')   
+```
+
+Ensuite on vas pouvoir boucler sur chaques mots présents avec une boucle for mais qui auras certaines conditions. 
+
+On vas lui demander de boucler unqiuement si la taille de notre mots est supérieure ou égale à 4 et que le mot n'est pas vide. 
+Frequencies est un array qui seras définis juste après. 
+
+```JS
+for (let word of words){
+        if (word !== ' ' && word.length >= 4){
+          if (frequencies[word]){
+          frequencies[word]++
+          } else {
+          frequencies[word] = 1
+         }
+        }
+       }
+```
+
+Frequencies est donc un array (tableau) qui vas stocker la fréquences d'apparitions d'un mot. 
+
+
+On vas également lui demandé de chercher la clé avec la lettre "k". C'est une convenance que la clé/key seras toujours noté K.
+
+```js
+       const frequenciesArray = []
+       for (let k in frequencies){
+        frequenciesArray.push({
+          word : k,
+          count : frequencies[k]
+        })
+       }
+```
+Enfin on vas avoir besoin d'une fonction de comparaison pour pouvoir comparer les nos words. Pour ça on vas refaire appel à notre fonction "sort" de l'exemple précédent. 
+
+```js
+requenciesArray.sort((a, b) => b.count - a.count)
+       console.log(`Les mots les plus fréquent sont  "${frequenciesArray[0].word}", "${frequenciesArray[1].word}", "${frequenciesArray[2].word}"`)
+```
