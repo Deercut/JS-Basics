@@ -7,183 +7,45 @@
     <title>JS varialbe</title>
 
     <script>
-      
-/*
-      console.log("Test Palindrome");
-
-      function isPalindrome(word) {
-        //Split
-        //const letters = word.split("");
-
-        //reverse
-        //letters.reverse();
-
-        //Join
-        //const reverseWord = letters.join("");
-
-        //ToUpperCase
-        //return word.toUpperCase() === reverseWord.toUpperCase()
-
-        //All in one or two
-        const reverseWord = word.split("").reverse().join("");
-        return word.toUpperCase() === reverseWord.toUpperCase();
-      }
-
-      const words = {
-        kayak: true,
-        SOS: true,
-        Kayak: true,
-        Bonjour: false,
-      };
-
-      for (let word in words) {
-        if (isPalindrome(word) !== words[word]) {
-          console.error('isPalindrome(${words})')
-        }
-      }
-
-      */
-      
-
-      
-/*
-      console.log("Tableau student");
-
-      const students = [
-        {
-          name: "Jean",
-          notes: [1, 20, 19, 16, 12],
-        },
-        {
-          name: "Mary",
-          notes: [14, 6, 15, 20, 15],
-        },
-        {
-          name: "Dustin",
-          notes: [12, 2, 14, 10, 8],
-        },
-        {
-          name: "Axel",
-          notes: [1, 20, 10, 16, 12],
-        },
-        {
-          name: "Chloe",
-          notes: [1, 20, 19, 16, 12],
-        },
-      ];
-
-      //Moyenne des notes
 
       const moyenne = (notes) => {
-        let sum = 0;
-        for (let note of notes) {
-          sum = sum + note;
+        let sum = 0 
+        for (let note of notes){
+          sum = sum + note
         }
-        return sum / notes.length;
-      };
-      //Ajouter la valuer à nos tableaux de notes
-
-      const compareStudent = (a, b) => {
-        return b.moyenne - a.moyenne;
-      };
-
-      for (let student of students) {
-        //Ici on modifie un objet et donc tout ce qui feras
-        //référance à notre objet
-        student.moyenne = moyenne(student.notes);
-        student.worst = Math.min(...student.notes);
-        student.best = Math.max(...student.notes);
+        return sum / notes.lenght
       }
+      
+      class Student {
+        ecole = 'Jules Ferry'
 
-      //Organiser moyenne la plus élévée
-      // Utiliser la fonction sort
-      //Permet d'organiser les éléments en place
-      // Soit alphabétiquement ou d'une façon
-      // Définis.
 
-      students.sort(compareStudent);
+        constructor(firstname, lastname) {
+          this.firstname = firstname
+          this.lastname = lastname
+        }
 
-      //fonction formatStudent pour afficher les informations de l'étudient. 
+        setNotes (notes) {
+          this.notes = notes
+        }
 
-      const formatStudent = (student) => {
-        return ` ${student.name} avec une moyenne de ${student.moyenne}, 
-        meilleur note (${student.best}),
-         pire note (${student.worst})`
-      }
-
-      //Top 3 des éléves
-      console.log(`TOp 3 étudiant
-      1 : ${formatStudent(students[0])}
-      2 : ${formatStudent(students[1])}
-      3 : ${formatStudent(students[2])}
-      `);      
-
-      //Afficher la notes Maximal et manimal
-      //Avec fonction min et max sur l'objet math.
-
-*/
-
+        canPass () {
+         return moyenne(this.notes) >= 10
+        }
 
       
-       console.log('Fréquence de mot dans une string')
-
-
-       //Créer un objet avec mot en propriété et leurs fréquence. 
-       //Retirer les charactères spéciaux. 
-
-       //Découper avec spli la phrase
-       //Créer l'objet qui contient les fréquences
-       //Replace pour retirer les , et charactère spéciaux
-       //Condition et boucel
-
-       const phrase = 'Vous, vous, savez pas!? Vous vous vous pas, y as Pas, de pas, Bonne ou mauvaise ...'
-       const frequencies = {}
-
-       //On pourrait faire un tableau ignored qui à tout les caractères à ignorer aussi. 
-       const ignored = [',','!','?']
-       let cleanPhrase = phrase.toLowerCase()
-        for (let charactère of ignored){
-          cleanPhrase = cleanPhrase.
-          replaceAll(charactère, '')
-        }
-       
-       const words = phrase.split(' ')    
-
-       //Bouclé sur chaqu'un des mots présent      
-
-       for (let word of words){
-        if (word !== ' ' && word.length >= 4){
-          if (frequencies[word]){
-          frequencies[word]++
-          } else {
-          frequencies[word] = 1
-         }
-        }
-       }
-
-       //On veut avoir un tableau qui stock nos fréquences
-       //K est pour key
-       
-       const frequenciesArray = []
-       for (let k in frequencies){
-        frequenciesArray.push({
-          word : k,
-          count : frequencies[k]
-        })
-       }
-       //On vas avoir besoin d'une fonction de comparaison
-
-       frequenciesArray.sort((a, b) => b.count - a.count)
-       console.log(`Les mots les plus fréquent sont  "${frequenciesArray[0].word}", "${frequenciesArray[1].word}", "${frequenciesArray[2].word}"`)
-
-
-
-
+      }
+      const john = new Student('John', 'Doe')
+      const chloe = new Student('Chloé', 'Papin')
+      john.setNotes([10, 12, 9])
+      chloe.setNotes([15, 13, 20])
+      console.log(john.canPass(), chloe.canPass())
 
     </script>
   </head>
   <body>
     <h1>Exo JavaScript</h1>
+    <h2> Les classes </h2>
     <p>Check la console !</p>
   </body>
 </html>
