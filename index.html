@@ -32,9 +32,16 @@
           }
         }
 
+        get name () {
+          return `${this.firstname} ${this.lastname}`
+        }
+
+
         canPass () {
          return moyenne(this.notes) >= 10
         }
+
+        static moyenne = 10
 
       
       }
@@ -45,7 +52,7 @@
       console.log(john.canPass(), chloe.canPass())
 
     </script>
-  </head>
+  </head> 🍋 
   <body>
     <h1>Exo JavaScript</h1>
     <h2> Les classes </h2>

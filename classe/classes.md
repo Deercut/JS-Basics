@@ -297,9 +297,8 @@ set notes (v) {
         canPass () {
          return moyenne(this.notes) >= 10
         }
-
-      
       }
+
       const john = new Student('John', 'Doe')
       const chloe = new Student('Chloé', 'Papin')
       john.notes([10, 12, 9])
@@ -310,3 +309,46 @@ set notes (v) {
 
 ### Les Getters (accéder à une donnée)
 
+Comment avoir le nom d'un utilisateur et que ce soit nom prénom suivis d'un espace ? 
+
+Comme pour les setters avec set, ic pour définir notre getter on vas utiliser :
+
+```js
+ get name () {
+
+}
+```
+Attention de ne SURTOUT PAS LUI donner de paramètre. Pour cela on pourras simplement faire un : 
+
+```js
+ const john = new Student('John', 'Doe')
+      const chloe = new Student('Chloé', 'Papin')
+      john.notes([10, 12, 9])
+      chloe.notes([15, 13, 20])
+      console.log(john.name, chloe.canPass())
+```
+
+Pour cela on vas compléter notre get name : 
+
+```js
+
+get name () {
+  return `${this.firstname} ${this.lastName}`
+}
+```
+Du coup des qu'on feras appel à notre fonction name il iras chercher nos propriétés first et last name. 
+
+
+### Définir directement nos méthodes sur notre class Student
+
+Imaginons qu'on ais besoin de la valeur qui est égale à la moyenne. 
+
+Pour cela on vas écrire 
+
+```js
+static moyenne = 10 
+```
+
+On auras alors : 
+
+![Moyenne Static](/JS%20Basics/assets/moyenneStatic.png)
