@@ -1,4 +1,4 @@
-# Les classes et programmation orienté objet (POO)
+# Les classes et programmation orienté objet (POO) et prototype
 
 Quand on crée un objet simple avec une propriété, et qu'on ajoute un .
 
@@ -32,7 +32,7 @@ Lister tout un tas de méthode pour pouvoir créer des objets bien plus rapideme
 
 Si on veut représenter un éléve avec nom prénom avoir une méthode qui permet d'afficher le nom et prénom tout attachés, on pourras le faire avec les classes. 
 
-## Syntaxe des classes
+# Syntaxe des classes
 
 
 ```js
@@ -71,7 +71,7 @@ console.log(john)
 ```
 On vas alors voir notre objet Student et voir qu'il a de suite la propriété ecole. 
 
-### Construire notre élève avec le constructor 
+## Construire notre élève avec le constructor 
 
 Avantage avec les fonctions qui sont définis dans les classes n'ont pas besoin du mot clé fonction devant. 
 
@@ -127,7 +127,8 @@ lastname : ajouté par nous même.
 ```
 Ici on vas donc pouvoir créer à la volé de nouveau étudiant. 
 
-### Et si on ajoutait des notes ?
+
+## Et si on ajoutait des notes ?
 
 Si on voulait ajouter des notes, mais pas directement dans le constructor ? 
 
@@ -181,3 +182,131 @@ const moyenne = (notes) => {
       chloe.setNotes([15, 13, 20])
       console.log(john.canPass(), chloe.canPass())
 ```
+
+
+Ainsi on vas pouvoir voir si la moyenne de ces nottes est supérieur à 10 ou pas. 
+On vas donc ré utliser notre fonction pour calculer la moyenne. 
+
+On voit donc qu'on peut créer tout un tas de méthodes qu'on peut metre sur notre "prototype" Student et qui va seras utilisable par tout les objets. 
+
+Après il y as des méthodes qu'on vas définires et qui seront appellées automatiquement. 
+
+## Méthode automatique Getter & Setter
+
+Au lieux d'utiliser une méthode setNotes on veut mettre des notes d'une autres façons : 
+
+```js
+ const john = new Student('John', 'Doe')
+      const chloe = new Student('Chloé', 'Papin')
+      john.notes([10, 12, 9])
+      chloe.setNotes([15, 13, 20])
+      console.log(john.canPass(), chloe.canPass())
+
+```
+Ici on remplace la méthode setNotes par notes. Cela fonctionne quand même, et quand on fait appel à .canPass() on voit que c'est quand même calculer. 
+
+Le soucis est que si on veut ajouter qu'une seul, la script plante (car on attends un tableau). 
+
+On vas donc devoir définir des Getter et Setter. 
+
+### Les Setters (définir une donnée)
+
+Ils seront automatiquement appelés quand on vas définir une valeur. 
+
+On peut créer une méthode notes() qui prendras en paramètre la valeur de la notes qu'on veut mettre et ensuite elle peut faire un code particulier. 
+
+Pour la définir comme un setter on vas devoir utliser le mot clé 'set' suivis d'une espace. 
+
+```js
+
+set notes (v) {
+  this.notes = v
+}
+
+```
+Mais on voit que la situation ne s'améliore pas vraiment, car on a une nouvelle erreur : 
+
+"Maximum call stack size exceeded".
+
+![error Js](/JS%20Basics/assets/ErrorMaxCall.png)
+
+Car quand on fait un this.notes il essai d'aller chercher le setter, mais du coup il s'appel en boucle et donc il plante. 
+
+Donc on peut pas appeller le this .notes. On vas pouoir l'écrire  :
+
+```js
+
+set notes (v) {
+  this._notes = v
+}
+
+```
+Du coup, on vas avoir un problème avec la méthode setNotes qui ne seras plus définis comme une fonction. 
+ 
+ On peut donc remplacer notre 
+
+
+ ```js
+    chloe.setNotes([15, 13, 20])
+ ```
+
+ Par : 
+
+  ```js
+    chloe.notes([15, 13, 20])
+ ```
+
+ Avantage qu'on as maintenant des méthodes, on vas pouvoir faire des vérifications et dans notre cas, vérifier qu'on à bien un tableau. 
+
+ La méthode isArray() est une méthode qui éxiste déjà dans l'objet Array. 
+
+ Avant tout on vas définir les _notes comme un tableau vide 
+
+  ```js
+    _notes = []
+ ```
+
+ Puis on vas conditionner avec une boucle 'if' pour vérifier si il s'agit bien d'un array 
+
+ ```js
+set notes (v) {
+  if(Array.isArray(v)){
+  this.notes = v
+  }
+}
+ ```
+ On vas donc remplir le tableau des notes et dans le cas contraire, on ne feras rien car on part de l'idée que c'est une erreur. 
+
+ ```js
+ class Student {
+        ecole = 'Jules Ferry'
+        _notes = []
+
+
+        constructor(firstname, lastname) {
+          this.firstname = firstname
+          this.lastname = lastname
+        }
+
+        set notes (v) {
+          if(Array.isArray(v)){
+            this.notes = v
+          }
+        }
+
+        canPass () {
+         return moyenne(this.notes) >= 10
+        }
+
+      
+      }
+      const john = new Student('John', 'Doe')
+      const chloe = new Student('Chloé', 'Papin')
+      john.notes([10, 12, 9])
+      chloe.notes([15, 13, 20])
+      console.log(john.canPass(), chloe.canPass())
+```
+
+
+### Les Getters (accéder à une donnée)
+

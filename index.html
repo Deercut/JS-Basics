@@ -18,6 +18,7 @@
       
       class Student {
         ecole = 'Jules Ferry'
+        _notes = []
 
 
         constructor(firstname, lastname) {
@@ -25,8 +26,10 @@
           this.lastname = lastname
         }
 
-        setNotes (notes) {
-          this.notes = notes
+        set notes (v) {
+          if(Array.isArray(v)){
+            this.notes = v
+          }
         }
 
         canPass () {
@@ -37,8 +40,8 @@
       }
       const john = new Student('John', 'Doe')
       const chloe = new Student('Chloé', 'Papin')
-      john.setNotes([10, 12, 9])
-      chloe.setNotes([15, 13, 20])
+      john.notes([10, 12, 9])
+      chloe.notes([15, 13, 20])
       console.log(john.canPass(), chloe.canPass())
 
     </script>
