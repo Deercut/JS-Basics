@@ -351,4 +351,4 @@ static moyenne = 10
 
 On auras alors : 
 
-![Moyenne Static](/JS%20Basics/assets/moyenneStatic.png)
+![Moyenne Static](/assets/moyenneStatic.png)
