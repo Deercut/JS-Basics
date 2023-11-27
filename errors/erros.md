@@ -117,7 +117,117 @@ try {
     const r = new Rectangle(width, height)
     console.log(r.perimeter)
 } catch {
-    console.log(e.message)
+    console.log('impossible de construire le rectangle')
+}
+```
+Les try catch permettes donc de bien gérer les erreurs. 
+Si il y à une erreur on iras directement dans le catch et l'éxécution du code s'arrête alors. 
+
+Imaginon maintenant de créer une fonction promptRectangle. 
+On vas demander de rentrer une hauteur et largeur pour voir si on peut créer un rectangle.
+
+```JS
+function promptRectangle(){
+try {
+    const width = parseInt(prompt('Largeur'), 10)
+    const height = parseInt(prompt('largeur'), 10)
+    const r = new Rectangle(width, height)
+    return r
+} catch(e) {
+    throw new Error ('Entrée utilisateur invalide')
+    }
+}
+try{
+promptRectangle()
+}catch(e){
+    console.log(e.message, e)
+}
+```
+De base les erreurs sont formatées bizarrement. On peut donc vouloir retourner un objet qui contiendras notre erreur. 
+
+Pour ce faire on procèderas ainsi : 
+
+```JS
+function promptRectangle(){
+try {
+    const width = parseInt(prompt('Largeur'), 10)
+    const height = parseInt(prompt('largeur'), 10)
+    const r = new Rectangle(width, height)
+    return r
+} catch(e) {
+    throw new Error ('Entrée utilisateur invalide')
+    }
+}
+try{
+promptRectangle()
+}catch(e){
+    console.log(e.message, {e})
+}
+```
+On peut vouloir savoir ce qui as provoquée cette erreur. Pour ça on vas passer un nouveau paramètre dans notre erreur avec un objet qui contiendrais la raison de cette erreur. 
+
+```JS
+function promptRectangle(){
+try {
+    const width = parseInt(prompt('Largeur'), 10)
+    const height = parseInt(prompt('largeur'), 10)
+    const r = new Rectangle(width, height)
+    return r
+} catch(e) {
+    throw new Error ('Entrée utilisateur invalide', {cause: e})
+    }
+}
+try{
+promptRectangle()
+}catch(e){
+    console.log(e.message, {e})
+}
+```
+Le soucis des erreurs dans JS est que souvent il y as qu'un simple message tout simple. 
+
+On peut donc vouloir créer des erreurs custom. 
+
+
+```JS
+
+class PromptError extends Error {
+
 }
 
+function promptRectangle(){
+try {
+    const width = parseInt(prompt('Largeur'), 10)
+    const height = parseInt(prompt('largeur'), 10)
+    const r = new Rectangle(width, height)
+    return r
+} catch(e) {
+    throw new PromptError ('Entrée utilisateur invalide', {cause: e})
+    }
+}
+try{
+promptRectangle()
+}catch(e){
+    console.log(e.message, {e})
+}
 ```
+On auras alors une PromptErro plutôt qu'une erreur classique.
+On vas alors pouvoir vérifier si on es dans une promptError ou une erreur classique. 
+
+Pour ça on vas pouvoir utiliser un mot clé bien spécifique. "instanceof"
+
+```JS
+try{
+promptRectangle()
+}catch(e){
+    if (e instanceof PromptError){
+    console.log(e.message, {e})
+    }else {
+        console.log('erreur classique')
+    }
+}
+```
+### Astuces
+
+Si on part du principe qu'une fonction peut retourner une erreur alors, créé rapidement une erreur classique. 
+Plus vite une erreur peut être retourner plus vite on gagneras du temps à la correction et la compréhension.
+
