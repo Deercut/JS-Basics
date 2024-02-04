@@ -118,7 +118,7 @@ On pourras également l'utiliser pour des objets.
 
 ## Pour de / for of
 
-'of' permet d'accéder au valeur. Dans notre cas on ne cherceras plus alors l'index avec i mais directement la note de notre tableau 'notes'. 
+'of' permet d'accéder au valeur. Dans notre cas on ne chercheras plus alors l'index avec i mais directement la note de notre tableau 'notes'. 
 Ne fonctionne que sur les choses itérables les tableaux. 
 
 ```js

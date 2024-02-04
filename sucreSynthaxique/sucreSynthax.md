@@ -175,4 +175,104 @@ const {firstname: prenom} = {
 console.log(prenom)
 // Je m'attends à avoir John
 
+
+const {irstname, lastname} ={
+    firstname: 'Michel',
+    lasname: 'Bacry',
+    age: 70
+}
+
+console.log(firstname,lastname)
+
+
+//Comme pour les nombres on vas pouvoir utiliser un rest opérateur (...)
+
+const {irstname, ...rest} ={
+    firstname: 'Michel',
+    lasname: 'Bacry',
+    age: 70
+}
+console.log(firstname,rest)
+
 ```
+ 
+ Ceci seras très utile pour les fonctions. 
+Imaginon qu'on es une fonction qui attende un objet avec les données utilisateurs et surtout l'age et le pays. 
+
+ ```JS
+
+function canDrive ({age, pays}){
+return true
+}
+
+// L'age seras dans la propriété age et pays dans pays. 
+
+ ```
+
+ Mais que ce passe t'il si demain on as besoin de la région en plus ? On aurais alors à simplement rajouté la propriété région dans notre fonction pour que cela fonctionne. 
+
+  ```JS
+
+function canDrive ({age, pays, region}){
+return true
+}
+canDrive({age: 18, pays: 'France', region: 'Lille'})
+// L'age seras dans la propriété age et pays dans pays. 
+
+ ```
+
+ On se rends compte qu'on vas gagner en flexibilité. 
+ Chose interessante on as aussi pouvoir attribuer une valeur par défaut. 
+
+ Par exemple si on as pas région, on peut très dire que par defaut ça seras Pairs. 
+
+ On évite ainsi le "undefined"
+
+   ```JS
+
+function canDrive ({age, pays, region="Paris"}){
+    // En mettant Paris par défaut on évite alors de devoir faire un if
+    if(region === undefinend){
+        region = "Paris"
+    }
+return true
+}
+canDrive({age: 18, pays: 'France', region: 'Lille'})
+
+ ```
+
+ ### Manipulation tableau et objet
+
+ Nous avons un tableau avec deux numbers. Si on veut ajouter des numbers à notre tableau on vas devoir utiliser une méthode comme push. 
+ Mais si on fait ça on vas alors modifier le tableau qui es retourné. 
+
+ On peut le faire avec une autre synthaxe. Cette synthaxe consiste en un nouveau tableau avec un "..." dedans 
+
+ ```Js
+
+const notes = [1, 3]
+
+const newNotes = [...notes, 10, 2]
+console.log(newNotes)
+//Je m'attends à recevoir les notes du premier tableau suivie des deux nouvells notes que j'ai ajoutées. 
+
+//ON peut également inverser le sens de nos éléments et placer nos notes à la fin. 
+
+const newNotes = [ 10, 2, ...notes]
+
+ ```
+
+ Contrairement à push, le tableau d'origine resteras inchangé. 
+
+ Plutot utile quand on vas vouloir rajouter des tableaux et manipuler nos éléments. 
+
+ Par exemple pour changer l'ordre d'un tableau on vas souvant pouvoir faire :
+
+ ```JS
+
+const notes = [1, 2, 3]
+
+const newRevers = [...notes].reverse()
+//Ainsi on auras un nouveau tableau qui seras reverse, mais on vas pas toucher au 1er tableau. 
+
+ ```
