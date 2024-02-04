@@ -276,3 +276,44 @@ const newRevers = [...notes].reverse()
 //Ainsi on auras un nouveau tableau qui seras reverse, mais on vas pas toucher au 1er tableau. 
 
  ```
+
+ On peut le faire également avec les objets. 
+
+ ```JS
+
+const person = {firstname = "Jean", lasname="Bibou"}
+
+const agePerson = {...person, age:18}
+//On auras donc un nouvel objet mais qui reprendras les propriétés de l'ancien en lui ajoutant l'âge. 
+
+ ```
+
+ ### Le sucre des conditions "Les ternaires"
+
+ Partons de l'idée de créer une constante age= 18. On voudrais afficher un message pour savoir si la personne à 18ans ou pas. 
+
+ On seras donc obligé de créer une variable message ne pas lui donenr de valeur de lui mettre une condition ...
+
+
+ ```JS 
+
+const age = 18 
+let message
+
+if(age >= 18 ){
+    mesasge = "Majeur"
+} else {
+    message = "Mineur"
+}
+console.log(message)
+ ```
+ 
+ On vas pouvoir faire beaucoup plus simple en créant des ternaires. C'est une synthaxe qu'on vas retrouver très souvent et qui est juste parfaite. Car on vas la retrouver dans beaucoup de langage. 
+
+  ```JS 
+
+const age = 18 
+let message = age >= 18 ? 'Majeur' : 'Mineur'
+console.log(message)
+ ```
+ On as donc quelques choses de bien plus joli dans le cas d'un if condition else. 
