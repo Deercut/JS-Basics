@@ -195,7 +195,7 @@ wait(2000)
 Le fait de pouvoir appeller à la suite permet d'éviter le callback hell et du coup on auras un seul et unique niveau de callback.
 
 
-### Asynch
+## Asynch function
 
 
 Deux façons de créer une fonction asynchrone : 
@@ -211,10 +211,11 @@ async function main(){
 ```JS
 
 const main = async () => {
-    
+
 }
 
 ```
+Exemple concret : 
 
 ```JS
 
@@ -235,6 +236,12 @@ function waitAndFail(duration) {
     })
 }
 
+asynch function main() {
+    return 4
+}
+
+console.log(main())
+// Ici on retourne une promess directement géré.
 
 
 
@@ -248,3 +255,58 @@ wait(2000)
     })
 
 ```
+
+### Le await dans une fonction asynchrone.
+
+Si on veut re attendre 2 secondes et afficher un message d'erreur ensuite on vas pouvoir utiliser await puis ajouter une promesse dont on attends la résolution.
+
+```JS
+
+async function attend(){
+    await wait(2000)
+    console.log('Hello world')
+    await wait(1000)
+    console.log('Bonjour le monde')
+}
+
+```
+
+On voit donc que c'est bien plus simple et compréhensible que le système de callback classique.
+
+Si on veut tester un fail, il vas alors falloir capturer l'erreur avec un try catch classique.
+
+```JS
+
+async function attend(){
+
+   try {
+    await waitAndFail(2000)
+    console.log('Hello world')
+    await wait(1000)
+    console.log('Bonjour le monde')} catch(e){
+        console.log('Error', e)
+    }
+}
+
+```
+
+Si jamais notre promess retourne un résultat on peut l'utiliser avec le await.
+
+```JS
+
+async function main(){
+    const duration = await wait(2000)
+    console.log(`Duration: ${duration}`)
+}
+
+main()
+    .then(n => console.log)
+
+```
+
+Suivis certains environement on peut utiliser aussi "top level await"
+Ce qui veut dire que si on utilise un await il doit être dans une fonction asynchrone OBLIGATOIREMENT !!! 
+
+
+## Combinaison de promesse
+
