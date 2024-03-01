@@ -107,3 +107,144 @@ Si la promess fonctionne alors n seras retourné sinon e seras retourné.
 
 Avantage est que tout ce qu'on utilise dans le then ou le catch peut être re utilisés
 
+Du coup on vas pouvoir gérer un peu plus facilement la compréhension et l'indentation de notre code. 
+
+
+```JS
+
+const p = new Promise((resolve, reject) => {
+    resolve(3)
+})
+
+p.then((n)=>{
+    console.log('Le nombre', n)
+    return 4
+})
+.then((n)=> console.log('Le nombre 2', n))
+.catch((e)=>{
+    console.log('Erreur,' e)
+})
+
+```
+
+Si jamais on ne métait pas de return alors le log nous retournerais undefined. Le then serais quand même exécuter mais il ne retournerais rien.
+
+```JS
+
+const p = new Promise((resolve, reject) => {
+    resolve(3)
+})
+
+p.then((n)=>{
+    console.log('Le nombre', n)
+    throw new Error('echec')
+})
+.then((n)=> console.log('Le nombre 2', n))
+.catch((e)=>{
+    console.log('Erreur,' e)
+    return 2
+})
+
+```
+
+Ici on vas pouvoir catcher la 1er erreur et avoir le reste du code qui vas quand même tourner. 
+
+On as tjs des callbacks, mais on vas pouvoir représenter du code sequencielle bien plus rapidement.
+
+
+### Finaly 3ème méthode qu'on peut call sur les promesses.
+
+Finaly est quelque chose qui seras exécuté peut importe si la promess est validé ou pas. 
+
+## Promess qui réussi et échoue
+
+```Js
+
+const p = new Promise((resolve, reject)=>{
+    resolve(4)
+})
+
+function wait(duration){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve(duration)
+        }, duration)
+    })
+}
+
+function waitAndFail(duration) {
+    return new Promise((resolve, reject)=>{
+        setTimeOut(()=>{
+            reject(duration)
+        }, duration)
+    })
+}
+
+// On vas re tester notre promes
+
+wait(2000)
+    .then(() => {
+        console.log('Attente 2s')
+        return wait(1000)
+    })
+    .then(() => {
+        console.log('Attente 1s')
+    })
+
+```
+Le fait de pouvoir appeller à la suite permet d'éviter le callback hell et du coup on auras un seul et unique niveau de callback.
+
+
+### Asynch
+
+
+Deux façons de créer une fonction asynchrone : 
+
+```JS
+
+async function main(){
+
+}
+
+```
+
+```JS
+
+const main = async () => {
+    
+}
+
+```
+
+```JS
+
+
+function wait(duration){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve(duration)
+        }, duration)
+    })
+}
+
+function waitAndFail(duration) {
+    return new Promise((resolve, reject)=>{
+        setTimeOut(()=>{
+            reject(duration)
+        }, duration)
+    })
+}
+
+
+
+
+wait(2000)
+    .then(() => {
+        console.log('Attente 2s')
+        return wait(1000)
+    })
+    .then(() => {
+        console.log('Attente 1s')
+    })
+
+```
