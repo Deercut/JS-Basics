@@ -364,3 +364,10 @@ Il vas regarder la promesse à terme. Si elle est tenue alors il vas le retourne
 Si jamais elle n'est pas tenu alors il vas retourner la promesse la plus rapide et l'afficher via le catch.
 
 
+## Ensuite ? 
+
+
+Il faut bien comprendre quand on crée une promesse, le code inscrit dedans est directement éxécuter. Ce n'est pas le .then qui vas lancer le code.
+
+L'utilisation du asynch est nécessaire uniquement si j'ai un await à l'intérieur. Ce n'est pas nécessaire si jamais on retourne directement une promesse.
+
