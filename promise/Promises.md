@@ -310,3 +310,57 @@ Ce qui veut dire que si on utilise un await il doit être dans une fonction asyn
 
 ## Combinaison de promesse
 
+Promise.resolve & Promise.reject permette tout simplement de retourner ou des algo retournes des promises à la place d'objets classique.
+
+### Promise.all()
+
+On vas lui passer un premier paramètre un itérable (comme un tableau)
+
+On auras en retour une nouvelle ormesse qui auras comme résultat la résolution de toutes les promesses.
+
+Si une des promesses dans la liste échoue alors ça nous retourneras l'erreur de la promesse en questions.
+
+```JS
+Promise.all([waitAndFail(1000), wait(2000)])
+    .then(console.log)
+    .catch(console.log)
+
+    // On s'attends à n'avoir que 1000 dans la console.
+    // La promess échoue et le catch seras directement appellé et retourneras le résulat de la première promesse qui auras échoué.
+
+```
+### Promise.allSettled()
+
+Un peu le même principe que le all sauf que ça vas ignorer les promesses qui vont échouer.
+
+
+```JS
+ Promise.allSettled([wait(1000), wait(2000)])
+    .then(console.log)
+    .catch(console.log)
+
+```
+
+On auras en retour 2 mais on auras également deux tableaux qui aurons chacun des objets qui nous retournerons le log de nos 2 promises.
+
+Si jamais on as une promises qui échoue, on auras toujours le log de 2 qui serais retourné, mais le tableau nous présenterais alors 2 objets, un avec un fail et l'autre avec un fullyfield.
+
+
+### any()
+
+La méthode any() prends en paramètre plusieurs promesses, any vas retourner le résultat de la première promises qui est résolut. 
+
+Si jamais la promesse échoue alors any vas nous retourner la première promesse qui n'est pas rejeté dans notre tableau de promesse.
+
+Si jamais toutes les promesses échoues, dans ce cas on auras un message d'erreur "Aggregate Error".
+
+
+### race()
+
+Un peu similaire au any(). Sauf que si la première promesse échoue alors, il vas concidérer que c'est un echec. 
+
+Il vas regarder la promesse à terme. Si elle est tenue alors il vas le retourner. 
+
+Si jamais elle n'est pas tenu alors il vas retourner la promesse la plus rapide et l'afficher via le catch.
+
+
